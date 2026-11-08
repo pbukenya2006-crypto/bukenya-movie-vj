@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="BUKENYA MOVIE VJ — your home of Luganda VJ movies, premium entertainment and Ugandan music.">
+  <title>BUKENYA MOVIE VJ | Your Home of VJ Movies</title>
+  <style>
+    :root {
+      --red: #e50914;
+      --red-dark: #9f0710;
+      --bg: #0b0b0d;
+      --panel: #17171b;
+      --panel-2: #222228;
+      --text: #fff;
+      --muted: #bdbdc5;
+      --gold: #f5c542;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Arial, Helvetica, sans-serif; line-height: 1.55;
+    }
+    a { color: inherit; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(10,10,12,.96); border-bottom: 1px solid #303036;
+      backdrop-filter: blur(10px);
+    }
+    .nav-wrap {
+      max-width: 1150px; margin: auto; padding: 13px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-mark {
+      width: 40px; height: 40px; display: grid; place-items: center;
+      background: var(--red); border-radius: 12px; font-size: 22px;
+    }
+    .brand-name { font-weight: 900; letter-spacing: .4px; font-size: 16px; }
+    nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    nav a {
+      text-decoration: none; color: #eee; font-size: 13px; font-weight: 700;
+      padding: 9px 11px; border-radius: 8px;
+    }
+    nav a:hover, nav a:focus { background: var(--red); }
+    .hero {
+      min-height: 520px; display: grid; place-items: center; text-align: center;
+      padding: 75px 20px 65px; position: relative; overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(5,5,8,.96), rgba(20,4,7,.78), rgba(5,5,8,.94)),
+        radial-gradient(ellipse at 50% 15%, #7e111b 0, #251015 42%, #09090b 78%);
+    }
+    .hero:before, .hero:after {
+      content: ""; position: absolute; width: 340px; height: 340px;
+      border: 1px solid rgba(229,9,20,.22); border-radius: 50%;
+      box-shadow: 0 0 70px rgba(229,9,20,.15);
+    }
+    .hero:before { top: -220px; left: -100px; }
+    .hero:after { bottom: -245px; right: -80px; }
+    .hero-content { max-width: 760px; position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-block; color: #ffd9dc; background: rgba(229,9,20,.18);
+      border: 1px solid rgba(229,9,20,.5); border-radius: 999px;
+      padding: 7px 13px; font-size: 12px; font-weight: 800; letter-spacing: 1.3px;
+    }
+    h1 { font-size: clamp(34px, 7vw, 64px); line-height: 1.06; margin: 20px 0 12px; }
+    .hero h1 span { color: var(--red); }
+    .hero p { color: #ddd; font-size: clamp(15px, 2.5vw, 19px); max-width: 620px; margin: 0 auto 25px; }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-block; text-decoration: none; border: 0; cursor: pointer;
+      border-radius: 9px; padding: 13px 19px; font-weight: 800; font-size: 14px;
+    }
+    .btn-primary { background: var(--red); color: white; }
+    .btn-primary:hover { background: #ff1b27; }
+    .btn-outline { border: 1px solid #aaa; color: white; background: rgba(255,255,255,.05); }
+    .quick-links {
+      max-width: 1000px; margin: -28px auto 0; padding: 0 16px; position: relative; z-index: 2;
+      display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px;
+    }
+    .quick-card {
+      background: linear-gradient(145deg,#24242b,#141418); border: 1px solid #34343b;
+      border-radius: 13px; padding: 17px 12px; text-align: center; text-decoration: none;
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
+    }
+    .quick-card strong { display: block; margin-top: 5px; font-size: 14px; }
+    .quick-card span { font-size: 25px; }
+    .section { max-width: 1150px; margin: auto; padding: 65px 18px 25px; }
+    .section-heading { margin-bottom: 20px; }
+    .section-heading h2 { margin: 0 0 5px; font-size: clamp(24px,4vw,32px); }
+    .section-heading p { color: var(--muted); margin: 0; }
+    .red-line { width: 55px; height: 4px; background: var(--red); border-radius: 5px; margin-top: 12px; }
+    .search-row { display: flex; gap: 9px; margin: 22px 0; }
+    .search-row input {
+      min-width: 0; flex: 1; padding: 13px 14px; border-radius: 9px;
+      border: 1px solid #444; background: #17171b; color: white; font-size: 15px;
+    }
+    .movies-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; }
+    .movie-card {
+      min-width: 0; background: var(--panel); border: 1px solid #2b2b32;
+      border-radius: 12px; overflow: hidden; transition: transform .18s,border-color .18s;
+    }
+    .movie-card:hover { transform: translateY(-3px); border-color: var(--red); }
+    .poster-link { display: block; position: relative; background: #25252b; aspect-ratio: 16/10; }
+    .poster-link img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .play {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      background: rgba(0,0,0,.12); font-size: 42px; text-shadow: 0 2px 12px #000;
+    }
+    .movie-info { padding: 12px; }
+    .movie-info h3 { font-size: 14px; line-height: 1.35; min-height: 38px; margin: 0 0 10px; }
+    .movie-info .btn { padding: 9px 11px; font-size: 12px; }
+    .empty { display: none; color: var(--muted); padding: 18px 0; }
+    .premium-panel {
+      background: linear-gradient(135deg,#241b08,#17171b 62%);
+      border: 1px solid #6a531a; border-radius: 16px; padding: 25px;
+      display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; align-items: center;
+    }
+    .premium-panel h3 { font-size: 24px; margin: 0 0 8px; color: var(--gold); }
+    .price { font-size: 28px; font-weight: 900; color: white; }
+    .note { color: var(--muted); font-size: 13px; }
+    .music-card, .contact-card {
+      background: var(--panel); border: 1px solid #303038; border-radius: 14px; padding: 20px;
+    }
+    audio { width: 100%; margin: 10px 0; }
+    .owner { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .owner img {
+      width: 125px; height: 125px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--gold); background: #333;
+    }
+    footer { margin-top: 55px; background: #141418; border-top: 1px solid #303038; padding: 25px 18px; text-align: center; color: var(--muted); font-size: 13px; }
+    /* Kinayuganda collection and premium embeds */
+    .collection-section { max-width: 1150px; margin: 0 auto; padding: 62px 18px 25px; }
+    .collection-section .section-heading { margin-bottom: 22px; }
+    .collection-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; }
+    .collection-card { min-width: 0; overflow: hidden; background: var(--panel); border: 1px solid #303038; border-radius: 13px; transition: transform .18s,border-color .18s; }
+    .collection-card:hover { transform: translateY(-3px); border-color: var(--red); }
+    .collection-poster { aspect-ratio: 16/10; background: #25252b; }
+    .collection-poster img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .collection-info { padding: 13px; }
+    .collection-info h3 { margin: 0 0 10px; font-size: 14px; min-height: 38px; }
+    .collection-info .btn { padding: 9px 11px; font-size: 12px; }
+    .premium-collection { max-width: 1150px; margin: 0 auto; padding: 12px 18px 25px; }
+    .premium-collection h2 { margin: 0 0 20px; font-size: clamp(22px,4vw,30px); }
+    .premium-collection-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+    .premium-video { background: var(--panel); border: 1px solid #303038; border-radius: 12px; overflow: hidden; padding: 12px; }
+    .premium-video h3 { margin: 0 0 10px; color: var(--gold); font-size: 15px; }
+    .premium-video iframe { display: block; width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 8px; }
+    .section-note { color: var(--muted); font-size: 13px; margin-top: 14px; }
+    @media (max-width: 850px) { .collection-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+    @media (max-width: 620px) { .collection-section { padding-top: 48px; } .collection-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 11px; } .collection-info { padding: 10px; } .premium-collection-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 350px) { .collection-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 850px) { .movies-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+    @media (max-width: 620px) {
+      .nav-wrap { align-items: flex-start; flex-direction: column; }
+      nav { justify-content: flex-start; gap: 2px; }
+      nav a { padding: 8px 9px; }
+      .hero { min-height: 455px; padding-top: 60px; }
+      .quick-links { gap: 8px; }
+      .quick-card { padding: 13px 5px; }
+      .quick-card strong { font-size: 10px; }
+      .movies-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 11px; }
+      .movie-info { padding: 10px; }
+      .premium-panel { grid-template-columns: 1fr; }
+      .section { padding-top: 48px; }
+    }
+    @media (max-width: 350px) { .movies-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="#home" aria-label="BUKENYA MOVIE VJ home">
+      <span class="brand-mark">🎬</span><span class="brand-name">BUKENYA MOVIE VJ</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#free">Free Movies</a>
+      <a href="#premium">Premium Movies</a>
+      <a href="#music">Uganda Music</a>
+      <a href="#kinayuganda-movies">Kinayuganda</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="eyebrow">YOUR HOME OF VJ MOVIES</span>
+      <h1>WELCOME TO <span>BUKENYA</span> MOVIE VJ</h1>
+      <p>Discover exciting VJ movies, enjoy premium entertainment and explore Ugandan music — all in one place.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#free">▶ EXPLORE FREE MOVIES</a>
+        <a class="btn btn-outline" href="#premium">👑 PREMIUM MOVIES</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="quick-links" aria-label="Explore sections">
+    <a class="quick-card" href="#free"><span>🎥</span><strong>FREE MOVIES</strong></a>
+    <a class="quick-card" href="#premium"><span>👑</span><strong>PREMIUM MOVIES</strong></a>
+    <a class="quick-card" href="#music"><span>🇺🇬</span><strong>UGANDA MUSIC</strong></a>
+    <a class="quick-card" href="#kinayuganda-movies"><span>🎞️</span><strong>KINAYUGANDA</strong></a>
+  </div>
+
+  <section class="section" id="free">
+    <div class="section-heading">
+      <h2>🎬 FREE MOVIES</h2>
+      <p>Choose a movie and tap Watch to open it on YouTube.</p>
+      <div class="red-line"></div>
+    </div>
+    <div class="search-row">
+      <input id="movieSearch" type="search" placeholder="🔍 Search free movies..." aria-label="Search free movies">
+      <button class="btn btn-primary" type="button" onclick="filterMovies()">Search</button>
+    </div>
+    <div class="movies-grid" id="moviesGrid">
+      <!-- Existing free movies -->
+      <article class="movie-card" data-title="Scary">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=inEfENnd8OI" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/inEfENnd8OI/hqdefault.jpg" alt="Scary movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>SCARY</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=inEfENnd8OI" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="This Is Not a Test">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=1YYh8YTLSgc" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/1YYh8YTLSgc/hqdefault.jpg" alt="This Is Not a Test poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>THIS IS NOT A TEST</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=1YYh8YTLSgc" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="The Commander">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=CFet_P_SVg0" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/CFet_P_SVg0/hqdefault.jpg" alt="The Commander poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>THE COMMANDER</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=CFet_P_SVg0" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Have You Seen My Son">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=iaw1B-8YGTU" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/iaw1B-8YGTU/hqdefault.jpg" alt="Have You Seen My Son poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>HAVE YOU SEEN MY SON</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=iaw1B-8YGTU" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Pinocchio">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=qfn5vX3TaWA" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/qfn5vX3TaWA/hqdefault.jpg" alt="Pinocchio poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>PINOCCHIO</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=qfn5vX3TaWA" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our New Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=ILNnx3H5aNM" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/ILNnx3H5aNM/hqdefault.jpg" alt="Featured movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FEATURED MOVIE</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=ILNnx3H5aNM" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Second Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=0KZR9BmLzW8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/0KZR9BmLzW8/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 2</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=0KZR9BmLzW8" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Third Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=xnZBS82lSRk" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/xnZBS82lSRk/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 3</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=xnZBS82lSRk" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Seven Cases">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=dK3acvBF3YQ" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/dK3acvBF3YQ/hqdefault.jpg" alt="Seven Cases poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>SEVEN CASES</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=dK3acvBF3YQ" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Acts of Vengeance">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=8E0PUHHcVgk" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/8E0PUHHcVgk/hqdefault.jpg" alt="Acts of Vengeance poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>ACTS OF VENGEANCE</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=8E0PUHHcVgk" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="The Magician">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=hvuf6Jf89YE" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/hvuf6Jf89YE/hqdefault.jpg" alt="The Magician poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>THE MAGICIAN</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=hvuf6Jf89YE" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Fourth Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=kyFBbQVx6R8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/kyFBbQVx6R8/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 4</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=kyFBbQVx6R8" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Sixth Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=80y9R06j36o" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/80y9R06j36o/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 5</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=80y9R06j36o" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Seventh Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=kuIzxn1AetQ" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/kuIzxn1AetQ/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 6</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=kuIzxn1AetQ" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Eighth Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=Ysgqo11qYGQ" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/Ysgqo11qYGQ/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 7</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=Ysgqo11qYGQ" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Ninth Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=I04yYfuZUUc" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/I04yYfuZUUc/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 8</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=I04yYfuZUUc" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Tenth Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=mLmA7qQAOLs" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/mLmA7qQAOLs/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 9</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=mLmA7qQAOLs" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Eleventh Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=8E0DmI_1XlQ" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/8E0DmI_1XlQ/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 10</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=8E0DmI_1XlQ" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Twelfth Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=3DlrFIIaSA0" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/3DlrFIIaSA0/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 11</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=3DlrFIIaSA0" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Thirteenth Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=Himb_Nq2vXk" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/Himb_Nq2vXk/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 12</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=Himb_Nq2vXk" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Watch Our Fifth Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=0iCuyyCGYDw" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/0iCuyyCGYDw/hqdefault.jpg" alt="Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FREE MOVIE 13</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=0iCuyyCGYDw" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Featured Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=w_GFQsYEYuI" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/w_GFQsYEYuI/hqdefault.jpg" alt="Featured movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FEATURED MOVIE 2</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=w_GFQsYEYuI" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+
+      <!-- Four movies from the earlier addition -->
+      <article class="movie-card" data-title="High Heart">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=9NCMN9jUJ-A" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/9NCMN9jUJ-A/hqdefault.jpg" alt="High Heart poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>HIGH HEART</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=9NCMN9jUJ-A" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="The War">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=vTAsNHN8Aqw" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/vTAsNHN8Aqw/hqdefault.jpg" alt="The War poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>THE WAR</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=vTAsNHN8Aqw" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Alone">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=-auChgisgDg" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/-auChgisgDg/hqdefault.jpg" alt="Alone poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>ALONE</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=-auChgisgDg" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="VJ Junior Movies 2026 Thriller">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=0pUFto9nIcI" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/0pUFto9nIcI/hqdefault.jpg" alt="VJ Junior thriller poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>VJ JUNIOR MOVIES 2026 THRILLER</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=0pUFto9nIcI" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+
+      <!-- Seventeen latest additions -->
+      <article class="movie-card" data-title="The War Between the Land and Sea">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=Z86PmjpjWGI" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/Z86PmjpjWGI/hqdefault.jpg" alt="The War Between the Land and Sea poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>THE WAR BETWEEN THE LAND AND SEA</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=Z86PmjpjWGI" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Action">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=IrptXVTCSR8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/IrptXVTCSR8/hqdefault.jpg" alt="Action movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>ACTION</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=IrptXVTCSR8" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="The Sick">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=IUkk4IichxU" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/IUkk4IichxU/hqdefault.jpg" alt="The Sick poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>THE SICK</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=IUkk4IichxU" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="The Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=DrHf9jKrx9A" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/DrHf9jKrx9A/hqdefault.jpg" alt="The Movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>THE MOVIE</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=DrHf9jKrx9A" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Escape Plan">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=XYDe_6RuiKQ" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/XYDe_6RuiKQ/hqdefault.jpg" alt="Escape Plan poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>ESCAPE PLAN</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=XYDe_6RuiKQ" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Chinese Movie">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=TMk9BIoVacs" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/TMk9BIoVacs/hqdefault.jpg" alt="Chinese movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>CHINESE MOVIE</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=TMk9BIoVacs" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="String On">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=y9gh8O4Iw3g" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/y9gh8O4Iw3g/hqdefault.jpg" alt="String On poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>STRING ON</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=y9gh8O4Iw3g" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Fighters">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=w7UFdrNSFU8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/w7UFdrNSFU8/hqdefault.jpg" alt="Fighters poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FIGHTERS</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=w7UFdrNSFU8" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Scott Adkins">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=VNsEOzHnNWw" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/VNsEOzHnNWw/hqdefault.jpg" alt="Scott Adkins movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>SCOTT ADKINS</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=VNsEOzHnNWw" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Life Drama">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=tdZZ-V9v6es" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/tdZZ-V9v6es/hqdefault.jpg" alt="Life Drama poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>LIFE DRAMA</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=tdZZ-V9v6es" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Omusezi">
+        <a class="poster-link" href="https://www.youtube.com/playlist?list=RDCWClJntMrbU" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/0/hqdefault.jpg" alt="Omusezi YouTube playlist" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>OMUSEZI – PLAYLIST</h3><a class="btn btn-primary" href="https://www.youtube.com/playlist?list=RDCWClJntMrbU" target="_blank" rel="noopener">Open Playlist</a></div>
+      </article>
+      <article class="movie-card" data-title="Together">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=W8z3CusCUrg" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/W8z3CusCUrg/hqdefault.jpg" alt="Together poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>TOGETHER</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=W8z3CusCUrg" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="The Dictator">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=L2WrAmYLVP4" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/L2WrAmYLVP4/hqdefault.jpg" alt="The Dictator poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>THE DICTATOR</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=L2WrAmYLVP4" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="VJ Jingo Movie 1">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=x_5vOPDh6o8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/x_5vOPDh6o8/hqdefault.jpg" alt="VJ Jingo movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>VJ JINGO – MOVIE 1</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=x_5vOPDh6o8" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="VJ Jingo Movie 2">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=hKxgL6I4cyA" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/hKxgL6I4cyA/hqdefault.jpg" alt="VJ Jingo movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>VJ JINGO – MOVIE 2</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=hKxgL6I4cyA" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="Fighters Movie 2">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=XpIALxqPbEE" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/XpIALxqPbEE/hqdefault.jpg" alt="Fighters movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>FIGHTERS – MOVIE 2</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=XpIALxqPbEE" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+      <article class="movie-card" data-title="VJ Jingo Movie 3">
+        <a class="poster-link" href="https://www.youtube.com/watch?v=75SzTz2BWJY" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/75SzTz2BWJY/hqdefault.jpg" alt="VJ Jingo movie poster" loading="lazy"><span class="play">▶</span></a>
+        <div class="movie-info"><h3>VJ JINGO – MOVIE 3</h3><a class="btn btn-primary" href="https://www.youtube.com/watch?v=75SzTz2BWJY" target="_blank" rel="noopener">Watch Movie</a></div>
+      </article>
+    </div>
+    <p class="empty" id="noResults">No movies match your search. Try another title.</p>
+  </section>
+
+  <section class="section" id="premium">
+    <div class="section-heading">
+      <h2>👑 PREMIUM MOVIES</h2>
+      <p>Premium entertainment for BUKENYA MOVIE VJ members.</p>
+      <div class="red-line"></div>
+    </div>
+    <div class="premium-panel">
+      <div>
+        <h3>Unlock Premium Membership</h3>
+        <p>Join the premium section for members-only movie access.</p>
+        <div class="price">UGX 10,000 <span class="note">/ month</span></div>
+        <p class="note">Payment verification and automatic member access are not connected yet. Do not treat this page as confirmation of payment or membership.</p>
+      </div>
+      <div>
+        <p><strong>Payment method:</strong> Airtel Money Uganda</p>
+        <p><strong>Payment recipient:</strong> Bukenya Peter</p>
+        <p><strong>Payment number:</strong> 0745643586</p>
+        <a class="btn btn-primary" href="#contact">Membership Enquiries</a>
+      </div>
+    </div>
+  </section>
+  <section class="premium-collection" aria-label="Premium movie collection">
+    <h2>🎬 PREMIUM MOVIE COLLECTION</h2>
+    <div class="premium-collection-grid">
+      <article class="premium-video"><h3>👑 THE HORROR</h3><iframe src="https://www.youtube.com/embed/Chay7WVMfTQ" title="The Horror" allowfullscreen loading="lazy"></iframe></article>
+      <article class="premium-video"><h3>👑 VJ JUNIOR</h3><iframe src="https://www.youtube.com/embed/EgXJt9XiLME" title="VJ Junior" allowfullscreen loading="lazy"></iframe></article>
+      <article class="premium-video"><h3>👑 SHRAPNEL</h3><iframe src="https://www.youtube.com/embed/o8abITu7IcU" title="Shrapnel" allowfullscreen loading="lazy"></iframe></article>
+    </div>
+    <p class="section-note">Premium access is not automatically verified by this page. Contact the owner for membership enquiries.</p>
+  </section>
+  <section class="section" id="music">
+    <div class="section-heading">
+      <h2>🇺🇬 UGANDA MUSIC</h2>
+      <p>Enjoy music and featured audio on BUKENYA MOVIE VJ.</p>
+      <div class="red-line"></div>
+    </div>
+    <div class="music-card">
+      <h3>🎵 Featured Ugandan Song</h3>
+      <audio controls preload="none">
+        <source src="songs/song1.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+      <p class="note">If the song does not play, check that songs/song1.mp3 is present in your website repository.</p>
+      <h3>🇿🇦 Lucky Dube – Official Music Videos</h3>
+      <p>Find official music videos on YouTube.</p>
+      <a class="btn btn-outline" href="https://www.youtube.com/results?search_query=Lucky+Dube+official+music+videos" target="_blank" rel="noopener">Find Music on YouTube</a>
+      <p class="note">Only upload or share music that you own or are authorised to distribute.</p>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-heading">
+      <h2>👑 ABOUT THE OWNER</h2>
+      <div class="red-line"></div>
+    </div>
+    <div class="contact-card owner">
+      <img src="owner.png" alt="BUKENYA MOVIE VJ owner">
+      <div>
+        <h3>Bukenya Peter</h3>
+        <p>📍 Kampala, Uganda 🇺🇬</p>
+        <p>🎬 Founder of BUKENYA MOVIE VJ</p>
+        <a class="btn btn-primary" href="tel:0745643586">📞 Call</a>
+        <a class="btn btn-outline" href="https://wa.me/256745643586" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>🎬 BUKENYA MOVIE VJ</strong>
+  <p>Your home of VJ movies!</p>
+  <p>© 2026 BUKENYA MOVIE VJ. Please share only content you are authorised to distribute.</p>
+</footer>
+
+<script>
+  const searchInput = document.getElementById("movieSearch");
+  function filterMovies() {
+    const query = searchInput.value.toLowerCase().trim();
+    const cards = document.querySelectorAll("#moviesGrid .movie-card");
+    let visible = 0;
+    cards.forEach(card => {
+      const title = (card.dataset.title + " " + card.textContent).toLowerCase();
+      const show = title.includes(query);
+      card.style.display = show ? "" : "none";
+      if (show) visible++;
+    });
+    document.getElementById("noResults").style.display = visible ? "none" : "block";
+  }
+  searchInput.addEventListener("input", filterMovies);
+  searchInput.addEventListener("keydown", event => { if (event.key === "Enter") filterMovies(); });
+</script>
+
+<!-- KINAYUGANDA MOVIES -->
+<section class="collection-section" id="kinayuganda-movies">
+  <div class="section-heading">
+    <h2>🇺🇬 KINAYUGANDA MOVIES</h2>
+    <p>Ugandan stories, local talent and movies in one collection.</p>
+    <div class="red-line"></div>
+  </div>
+  <div class="collection-grid">
+    <article class="collection-card"><a class="collection-poster" href="https://www.youtube.com/" target="_blank" rel="noopener"><img src="owner.png" alt="Ugandan movie placeholder poster" loading="lazy"></a><div class="collection-info"><h3>UGANDAN MOVIE 1</h3><a class="btn btn-primary" href="https://www.youtube.com/" target="_blank" rel="noopener">▶ WATCH MOVIE</a></div></article>
+    <article class="collection-card"><a class="collection-poster" href="https://www.youtube.com/" target="_blank" rel="noopener"><img src="owner.png" alt="Ugandan movie placeholder poster" loading="lazy"></a><div class="collection-info"><h3>UGANDAN MOVIE 2</h3><a class="btn btn-primary" href="https://www.youtube.com/" target="_blank" rel="noopener">▶ WATCH MOVIE</a></div></article>
+    <article class="collection-card"><a class="collection-poster" href="https://www.youtube.com/" target="_blank" rel="noopener"><img src="owner.png" alt="Ugandan movie placeholder poster" loading="lazy"></a><div class="collection-info"><h3>UGANDAN MOVIE 3</h3><a class="btn btn-primary" href="https://www.youtube.com/" target="_blank" rel="noopener">▶ WATCH MOVIE</a></div></article>
+    <article class="collection-card"><a class="collection-poster" href="https://www.youtube.com/" target="_blank" rel="noopener"><img src="owner.png" alt="Ugandan movie placeholder poster" loading="lazy"></a><div class="collection-info"><h3>UGANDAN MOVIE 4</h3><a class="btn btn-primary" href="https://www.youtube.com/" target="_blank" rel="noopener">▶ WATCH MOVIE</a></div></article>
+  </div>
+  <p class="section-note">These four cards are placeholders. Replace each title, poster and YouTube link with the actual Ugandan movie details before publishing.</p>
+</section>
+<!-- END KINAYUGANDA MOVIES -->
+
+</body>
+</html>
