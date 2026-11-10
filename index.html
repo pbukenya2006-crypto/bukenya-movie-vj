@@ -576,12 +576,17 @@ style="display:block;background:#e50914;color:white;padding:10px;text-decoration
     document.body.style.overflow='hidden';
   }
   function closePlayer(){overlay.classList.remove('open');frame.src='about:blank';document.body.style.overflow='';}
-  document.addEventListener('click',function(event){
-    const link=event.target.closest('a[href]');
-    if(!link) return;
-    const id=getVideoId(link.href);
-    if(id){event.preventDefault();openPlayer(id);}
-  });
+document.addEventListener('click', function(event){
+  const link = event.target.closest('a[href]');
+  if(!link) return;
+
+  const id = getVideoId(link.getAttribute('href'));
+  if(!id) return;
+
+  event.preventDefault();
+  event.stopPropagation();
+  openPlayer(id);
+}, true);
   closeBtn.addEventListener('click',closePlayer);
   overlay.addEventListener('click',function(event){if(event.target===overlay)closePlayer();});
   document.addEventListener('keydown',function(event){if(event.key==='Escape'&&overlay.classList.contains('open'))closePlayer();});
