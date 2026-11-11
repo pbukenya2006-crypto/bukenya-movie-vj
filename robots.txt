@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pbukenya2006-crypto.github.io/bukenya-movie-vj/sitemap.xml
